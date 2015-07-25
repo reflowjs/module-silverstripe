@@ -3,20 +3,20 @@
     <head>
         <meta charset="utf-8" />
         <title>Reflow</title>
-        <link rel="stylesheet" href="reflow/thirdparty/reflow-silverstripe/highlight.8.3.css">
-        <link rel="stylesheet" href="reflow/thirdparty/reflow-silverstripe/silverstripe.css">
+        <link rel="stylesheet" href="reflow/public/thirdparty/reflow-silverstripe/highlight.8.3.css">
+        <link rel="stylesheet" href="reflow/public/thirdparty/reflow-silverstripe/silverstripe.css">
     </head>
     <body>
         <div class="wrapper" data-behaviors="scale" data-scale-target=".content" data-scale-delay="250">
             <div class="content"></div>
         </div>
-        <script src="reflow/thirdparty/reflow-silverstripe/jquery.1.9.1.js"></script>
-        <script src="reflow/thirdparty/reflow-silverstripe/jquery.easing.1.3.js"></script>
-        <script src="reflow/thirdparty/reflow-silverstripe/jquery.transit.0.9.9.js"></script>
-        <script src="reflow/thirdparty/reflow-silverstripe/jgestures.0.9.js"></script>
-        <script src="reflow/thirdparty/reflow-silverstripe/highlight.8.3.js"></script>
-        <script src="reflow/thirdparty/reflow-silverstripe/jquery.fontspy.3.0.0.js"></script>
-        <script src="reflow/thirdparty/reflow-core/dist/reflow.js"></script>
+        <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.1.9.1.js"></script>
+        <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.easing.1.3.js"></script>
+        <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.transit.0.9.9.js"></script>
+        <script src="reflow/public/thirdparty/reflow-silverstripe/jgestures.0.9.js"></script>
+        <script src="reflow/public/thirdparty/reflow-silverstripe/highlight.8.3.js"></script>
+        <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.fontspy.3.0.0.js"></script>
+        <script src="reflow/public/thirdparty/reflow-core/dist/reflow.js"></script>
         <script>
             fontSpy("latoregular", {
                 "glyphs"  : "a",

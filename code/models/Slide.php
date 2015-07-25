@@ -46,7 +46,7 @@ class Slide extends Page
             "Metadata",
         ]);
 
-        Requirements::css("reflow/css/reflow.css");
+        Requirements::css("reflow/public/css/reflow.css");
 
         $markup = $this->getCodeEditorField("Markup", "Markup", "html");
         $styles = $this->getCodeEditorField("Styles", "Styles", "css");
