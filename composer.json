@@ -1,0 +1,12 @@
+{
+    "name": "silverstripe/reflow",
+    "type": "silverstripe-module",
+    "require": {
+        "silverstripe/framework": "^3.1",
+        "silverstripe/cms": "^3.1",
+        "nathancox/codeeditorfield": "dev-master",
+        "silverstripe/lumberjack": "dev-allow-child-page-overrides as 1.2.x-dev",
+        "undefinedoffset/sortablegridfield": "dev-master"
+    },
+    "license": "MIT"
+}
