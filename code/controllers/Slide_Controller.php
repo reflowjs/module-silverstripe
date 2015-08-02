@@ -5,11 +5,11 @@ class Slide_Controller extends ContentController
     /**
      * @var array
      */
-    private static $allowed_actions = [
+    private static $allowed_actions = array(
         "Markup",
         "Styles",
         "Scripts",
-    ];
+    );
 
     /**
      * @return string

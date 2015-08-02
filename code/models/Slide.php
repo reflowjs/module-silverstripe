@@ -3,33 +3,35 @@
 class Slide extends Page
 {
     /**
-     * @var string
-     */
-    public static $default_sort = "SortOrder";
-    /**
      * @var bool
      */
     private static $show_in_sitetree = false;
-    /**
-     * @var array
-     */
-    private static $allowed_children = [];
-    /**
-     * @var array
-     */
-    private static $db = [
-        "Markup"    => "Text",
-        "Styles"    => "Text",
-        "Scripts"   => "Text",
-        "SortOrder" => "Int",
-    ];
 
     /**
      * @var array
      */
-    private static $belongs_to = [
+    private static $allowed_children = array();
+
+    /**
+     * @var bool
+     */
+    private static $can_be_root = false;
+
+    /**
+     * @var array
+     */
+    private static $db = array(
+        "Markup"    => "Text",
+        "Styles"    => "Text",
+        "Scripts"   => "Text",
+    );
+
+    /**
+     * @var array
+     */
+    private static $belongs_to = array(
         "Deck" => "Deck",
-    ];
+    );
 
     /**
      * @return FieldList
@@ -38,27 +40,40 @@ class Slide extends Page
     {
         $fields = parent::getCMSFields();
 
-        $fields->removeFieldsFromTab("Root.Main", [
+        Requirements::css("reflow/public/css/reflow.css");
+        Requirements::javascript("reflow/public/js/reflow.js");
+
+        $fields->removeFieldsFromTab("Root.Main", array(
             "Title",
-            "URLSegment",
             "MenuTitle",
             "Content",
             "Metadata",
-        ]);
-
-        Requirements::css("reflow/public/css/reflow.css");
+        ));
 
         $markup = $this->getCodeEditorField("Markup", "Markup", "html");
         $styles = $this->getCodeEditorField("Styles", "Styles", "css");
         $scripts = $this->getCodeEditorField("Scripts", "Scripts", "js");
 
-        $fields->addFieldsToTab("Root.Main", [
+        $fields->addFieldsToTab("Root.Main", array(
             new TextField("Title", "Title"),
-            new TextField("URLSegment", "URL Segment"),
             $this->getToggleField("MarkupToggle", "Markup", $markup, true),
             $this->getToggleField("StylesToggle", "Styles", $styles),
             $this->getToggleField("ScriptsToggle", "Scripts", $scripts),
-        ]);
+        ));
+
+        return $fields;
+    }
+
+    public function getSettingsFields()
+    {
+        $fields = parent::getSettingsFields();
+
+        $fields->removeFieldsFromTab("Root.Settings", array(
+            "ClassName",
+            "ParentType",
+            "ParentID",
+            "Visibility",
+        ));
 
         return $fields;
     }
@@ -90,7 +105,7 @@ class Slide extends Page
      */
     protected function getToggleField($name, $label, $field, $open = false)
     {
-        $field = new ToggleCompositeField($name, $label, [$field]);
+        $field = new ToggleCompositeField($name, $label, array($field));
         $field->addExtraClass("code-editor-toggle");
         $field->setStartClosed(!$open);
 

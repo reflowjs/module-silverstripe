@@ -6,7 +6,10 @@
         "silverstripe/cms": "^3.1",
         "nathancox/codeeditorfield": "dev-master",
         "silverstripe/lumberjack": "dev-allow-child-page-overrides as 1.2.x-dev",
-        "undefinedoffset/sortablegridfield": "dev-master"
+        "undefinedoffset/silverstripe-keyboardshortcuts": "dev-master",
+        "markguinn/silverstripe-gridfieldmultiselect": "dev-master",
+        "silverstripe-australia/gridfieldextensions": "^1.0",
+        "heyday/silverstripe-gridfieldversionedorderablerows": "dev-add-installer-name as ^0.1"
     },
     "license": "MIT"
 }

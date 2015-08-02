@@ -1,3 +1,11 @@
 .code-editor-toggle .ui-accordion-content {
     padding: 0 !important;
 }
+
+.cms .ss-gridfield > div.ss-gridfield-buttonrow-before .action {
+    margin-top: 0 !important;
+}
+
+.numeric input[type='number'] {
+    width: 6em;
+}

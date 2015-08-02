@@ -7,12 +7,13 @@
         <link rel="stylesheet" href="reflow/public/thirdparty/reflow-silverstripe/silverstripe.css">
     </head>
     <body>
-        <div class="wrapper" data-behaviors="scale" data-scale-target=".content" data-scale-delay="250">
+        <div class="wrapper" data-behaviors="scale" data-scale-target=".content" data-scale-delay="250" data-scale-modifier="{$Scale}">
             <div class="content"></div>
         </div>
         <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.1.9.1.js"></script>
         <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.easing.1.3.js"></script>
         <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.transit.0.9.9.js"></script>
+        <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.debounce.1.1.js"></script>
         <script src="reflow/public/thirdparty/reflow-silverstripe/jgestures.0.9.js"></script>
         <script src="reflow/public/thirdparty/reflow-silverstripe/highlight.8.3.js"></script>
         <script src="reflow/public/thirdparty/reflow-silverstripe/jquery.fontspy.3.0.0.js"></script>
@@ -39,10 +40,10 @@
             var reflow = new Reflow({
                 "target"        : ".content",
                 "adapter"       : new Reflow.Adapter.jQuery(),
-                "preloadBefore" : 3,
-                "preloadAfter"  : 3,
-                "unloadBefore"  : 3,
-                "unloadAfter"   : 3,
+                "preloadBefore" : {$PreloadBefore},
+                "preloadAfter"  : {$PreloadAfter},
+                "unloadBefore"  : {$UnloadBefore},
+                "unloadAfter"   : {$UnloadAfter},
                 "behaviors"     : {
                     "animation-fade-in"   : new Reflow.Behavior.Animation.FadeIn(),
                     "animation-fade-out"  : new Reflow.Behavior.Animation.FadeOut(),
@@ -59,26 +60,19 @@
                     <% loop $Slides %>
                         new Reflow.Page({
                             "resources" : {
-                                <% if $Markup %>
-                                    "html" : "{$Link}Markup",
-                                <% end_if %>
-                                <% if $Styles %>
-                                    "css"  : "{$Link}Styles",
-                                <% end_if %>
-                                <% if $Scripts %>
-                                    "js"   : "{$Link}Scripts",
-                                <% end_if %>
-
-                                "noop" : "noop"
+                                "html"  : <% if $Markup %>"{$Link}Markup",<% else %>null,<% end_if %>
+                                "css"   : <% if $Styles %>"{$Link}Styles",<% else %>null,<% end_if %>
+                                "js"    : <% if $Scripts %>"{$Link}Scripts",<% else %>null,<% end_if %>
+                                "trail" : null
                             },
-                            "hash" : "$URLSegment"
+                            "hash" : "{$URLSegment}"
                         }),
                     <% end_loop %>
                 ],
                 "defaults" : {
                     "animations" : {
-                        "show" : "none",
-                        "hide" : "none"
+                        "show" : "{$Animation}",
+                        "hide" : "{$Animation}"
                     }
                 },
                 "animations" : {
@@ -107,13 +101,29 @@
                 }
             });
 
-            $(window).bind("keydown", function(e) {
+            $(window).bind("keydown", $.throttle(250, function(e) {
                 if (e.which == 37) {
                     Reflow.getInstance().previous();
                 }
 
                 if (e.which == 39) {
                     Reflow.getInstance().next();
+                }
+            }));
+
+            $(window).bind("keydown", function(e) {
+                if (e.altKey && e.which === 70) {
+                    var element = document.querySelector(".content");
+
+                    if (element.requestFullscreen) {
+                      element.requestFullscreen();
+                    } else if (element.msRequestFullscreen) {
+                      element.msRequestFullscreen();
+                    } else if (element.mozRequestFullScreen) {
+                      element.mozRequestFullScreen();
+                    } else if (element.webkitRequestFullscreen) {
+                      element.webkitRequestFullscreen();
+                    }
                 }
             });
         </script>
