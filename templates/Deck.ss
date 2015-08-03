@@ -52,6 +52,7 @@
                     "background"          : new Reflow.Behavior.Background(),
                     "center"              : new Reflow.Behavior.Center(),
                     "fit"                 : new Reflow.Behavior.Fit(),
+                    "fixed-image"         : new Reflow.Behavior.FixedImage(),
                     "highlight"           : new Reflow.Behavior.Highlight(),
                     "scale"               : new Reflow.Behavior.Scale(),
                     "swipe"               : new Reflow.Behavior.Swipe()
