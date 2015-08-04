@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @mixin Slide
+ */
 class Slide_Controller extends ContentController
 {
     /**
@@ -9,6 +12,7 @@ class Slide_Controller extends ContentController
         "Markup",
         "Styles",
         "Scripts",
+        "Capture",
     );
 
     /**
@@ -16,7 +20,7 @@ class Slide_Controller extends ContentController
      */
     public function Markup()
     {
-        return $this->data()->Markup;
+        return $this->Markup;
     }
 
     /**
@@ -26,7 +30,7 @@ class Slide_Controller extends ContentController
     {
         $this->response->addHeader("Content-Type", "text/css");
 
-        return $this->data()->Styles;
+        return $this->Styles;
     }
 
     /**
@@ -36,6 +40,32 @@ class Slide_Controller extends ContentController
     {
         $this->response->addHeader("Content-Type", "text/javascript");
 
-        return $this->data()->Scripts;
+        return $this->Scripts;
+    }
+
+    /**
+     * @return string
+     */
+    public function Capture()
+    {
+        $this->response->addHeader("Content-Type", "text/javascript");
+
+        $parent = $this->Parent();
+        $segment = $this->URLSegment;
+
+        $url = rtrim($parent->AbsoluteLink(), "/") . "#" . $segment;
+
+        return "
+            var page = require('webpage').create();
+            var fs = require('fs');
+
+            page.open('{$url}', function() {
+                page.render('{$segment}.png');
+
+                fs.write('/dev/stdout', page.renderBase64('PNG'), 'w');
+
+                phantom.exit();
+            });
+        ";
     }
 }

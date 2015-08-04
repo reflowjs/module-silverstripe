@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @property string Markup
+ * @property string Styles
+ * @property string Scripts
+ * @property string URLSegment
+ *
+ * @method string AbsoluteLink()
+ * @method Deck Parent()
+ */
 class Slide extends Page
 {
     /**

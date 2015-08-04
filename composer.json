@@ -9,7 +9,18 @@
         "undefinedoffset/silverstripe-keyboardshortcuts": "dev-master",
         "markguinn/silverstripe-gridfieldmultiselect": "dev-master",
         "silverstripe-australia/gridfieldextensions": "^1.0",
-        "heyday/silverstripe-gridfieldversionedorderablerows": "dev-add-installer-name as ^0.1"
+        "heyday/silverstripe-gridfieldversionedorderablerows": "dev-add-installer-name as ^0.1",
+        "asyncphp/doorman": "^1.2.0",
+        "jonnyw/php-phantomjs": "3.*",
+        "itbz/fpdf": "dev-master"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "scripts": {
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
+    }
 }

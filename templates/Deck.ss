@@ -103,11 +103,11 @@
             });
 
             $(window).bind("keydown", $.throttle(250, function(e) {
-                if (e.which == 37) {
+                if (e.which == 37 || e.which == 33) {
                     Reflow.getInstance().previous();
                 }
 
-                if (e.which == 39) {
+                if (e.which == 39 || e.which == 34) {
                     Reflow.getInstance().next();
                 }
             }));
