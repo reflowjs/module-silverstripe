@@ -13,7 +13,7 @@ class Deck extends Page
         "PreloadAfter"  => "Int",
         "UnloadBefore"  => "Int",
         "UnloadAfter"   => "Int",
-        "Scale"         => "Decimal(1)",
+        "Scale"         => "Decimal",
         "Animation"     => "Varchar",
     );
 
