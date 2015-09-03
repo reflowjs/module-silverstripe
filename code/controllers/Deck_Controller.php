@@ -38,7 +38,7 @@ class Deck_Controller extends ContentController
         $manager->addRule($rule);
 
         $manager->addTask(new ProcessCallbackTask(function() use ($assetPath, $deckSegment) {
-            exec("mkdir {$assetPath}/{$deckSegment}");
+            exec("mkdir {$assetPath}/{$deckSegment}/export");
         }));
 
         /** @var Slide $slide */
@@ -79,7 +79,7 @@ class Deck_Controller extends ContentController
         foreach ($this->Slides() as $slide) {
             $slideSegment = $slide->URLSegment;
 
-            $slides[] = "{$assetPath}/{$deckSegment}/{$slideSegment}.png";
+            $slides[] = "{$assetPath}/{$deckSegment}/export/{$slideSegment}.png";
         }
 
         while ($manager->tick()) {
